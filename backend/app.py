@@ -26,6 +26,49 @@ def get_db_connection():
     )
     return conn
 
+def get_first_image_of_posts():
+    query = """
+        SELECT
+            p.title,
+            pi.url AS first_image_url
+        FROM posts p
+        LEFT JOIN post_image pi
+            ON p.id = pi.posts_id
+        WHERE pi.order_num = 1;
+    """
+    try:
+        # Connect to the database
+        conn = get_db_connection()
+        cur = conn.cursor()
+
+        # Execute the query
+        cur.execute(query)
+        results = cur.fetchall()
+
+        # Convert results into a list of dictionaries
+        data = [
+            {"title": row[0], "first_image_url": row[1]}
+            for row in results
+        ]
+
+        # Clean up
+        cur.close()
+        conn.close()
+
+        return data
+
+    except psycopg2.Error as e:
+        return {"error": f"Database error: {str(e)}"}
+    except Exception as e:
+        return {"error": f"An error occurred: {str(e)}"}
+
+
+
+@app.route('/posts/first-image', methods=['GET'])
+def get_posts_with_images():
+    data = get_first_image_of_posts()
+    return jsonify(data)
+
 @app.route('/api/products', methods=['GET'])
 def get_products():
     conn = get_db_connection()

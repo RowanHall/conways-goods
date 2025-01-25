@@ -11,7 +11,7 @@ const Products = () => {
 
   useEffect(() => {
     axios
-      .get("http://127.0.0.1:5000/api/products")
+      .get("http://127.0.0.1:5000/posts/products")
       .then((response) => {
         console.log("Fetched products:", response.data);
         setProducts(response.data); // Assume response.data is an array of Product

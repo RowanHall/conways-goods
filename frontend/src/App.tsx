@@ -41,6 +41,7 @@ import Cart from "./pages/Cart";
 import Shop from "./pages/Shop";
 import Brands from "./pages/Brands";
 import Products from "./Products";
+import Posts from "./Posts";
 
 export default function App() {
   const [message, setMessage] = useState(""); // State to hold data from API
@@ -78,7 +79,7 @@ export default function App() {
         <Route path="/cart" element={<Cart />} />
         <Route path="/products" element={<Products />} />
       </Routes>
-      <Products />
+      <Posts />
       <Bottom />
     </Router>
   );
