@@ -35,13 +35,13 @@ import axios from "axios";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import "./App.css";
 import "./base.css";
-import Navbar from "./Navbar";
-import Bottom from "./Bottom";
+import Navbar from "./components/Navbar/Navbar";
+import Bottom from "./components/Bottom/Bottom";
 import Cart from "./pages/Cart";
 import Shop from "./pages/Shop";
 import Brands from "./pages/Brands";
-import Products from "./Products";
-import Posts from "./Posts";
+import Products from "./components/Products/Products";
+import Posts from "./components/Posts/Posts";
 
 export default function App() {
   const [message, setMessage] = useState(""); // State to hold data from API
