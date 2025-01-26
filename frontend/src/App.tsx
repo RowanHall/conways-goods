@@ -65,19 +65,10 @@ export default function App() {
 
       {/* Homepage */}
       <Routes>
-        <Route
-          path="/"
-          element={
-            <div>
-              <h1>Welcome to the Homepage!</h1>
-              <p>{message}</p> {/* Display data fetched from Flask */}
-            </div>
-          }
-        />
         <Route path="/brands" element={<Brands />} />
         <Route path="/shop" element={<Shop />} />
         <Route path="/cart" element={<Cart />} />
-        <Route path="/products" element={<Products />} />
+        {/*<Route path="/products" element={<Products />} />*/}
       </Routes>
       <Posts />
       <Bottom />

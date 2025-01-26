@@ -58,25 +58,31 @@ const PostsWithImages: React.FC = () => {
 
   return (
     <div>
-      <h1>Posts with Images</h1>
-      <ul style={{ listStyleType: "none", padding: 0 }}>
-        {posts.map((post, index) => (
-          <li key={index} style={{ marginBottom: "20px" }}>
-            <h2>{post.title}</h2> {/* Display the post title */}
-            <img
-              src={post.first_image_url}
-              alt={post.title}
-              style={{
-                maxWidth: "300px",
-                border: "1px solid #ccc",
-                borderRadius: "5px",
-                padding: "5px",
-              }}
-            />{" "}
-            {/* Display the post image */}
-          </li>
-        ))}
-      </ul>
+      <h1>Shop</h1>
+      <div className="carousel-items-wrapper">
+        <div className="carousel-items-padding">
+          <div className="item-inner">
+            <a className="item-inner-link">
+              {posts.map((post, index) => (
+                <li key={index} style={{ marginBottom: "20px" }}>
+                  <h2>{post.title}</h2> {/* Display the post title */}
+                  <img
+                    src={post.first_image_url}
+                    alt={post.title}
+                    style={{
+                      maxWidth: "300px",
+                      border: "1px solid #ccc",
+                      borderRadius: "5px",
+                      padding: "5px",
+                    }}
+                  />{" "}
+                </li>
+              ))}
+            </a>
+            <div className="item-heart-price"></div>
+          </div>
+        </div>
+      </div>
     </div>
   );
 };
