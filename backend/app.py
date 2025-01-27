@@ -30,6 +30,7 @@ def get_first_image_of_posts():
     query = """
         SELECT
             p.title,
+            p.price,
             pi.url AS first_image_url
         FROM posts p
         LEFT JOIN post_image pi
@@ -47,7 +48,7 @@ def get_first_image_of_posts():
 
         # Convert results into a list of dictionaries
         data = [
-            {"title": row[0], "first_image_url": row[1]}
+            {"title": row[0], "price": row[1], "first_image_url": row[2]}
             for row in results
         ]
 

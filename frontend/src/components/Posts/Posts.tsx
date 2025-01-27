@@ -42,6 +42,7 @@ const PostsWithImages: React.FC = () => {
                   style={{}}
                 />{" "}
                 <h2 className="post-title">{post.title}</h2>
+                <h2 className="post-price">${post.price}</h2>
               </li>
             ))}
             <div className="item-heart-price"></div>
