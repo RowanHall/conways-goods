@@ -24,7 +24,7 @@ const PostsWithImages: React.FC = () => {
   }, []);
 
   return (
-    <div>
+    <div className="carousel-container">
       <h2 className="sub-title">Featured</h2>
 
       <div className="carousel-items-container">

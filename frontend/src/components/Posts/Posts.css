@@ -8,11 +8,15 @@
 .post-title {
     display: flex;
     margin-left: .8rem;
-    font-size: 1.5rem;
+    /* font-size: 1.5rem; */
     /* font-weight: 500; */
-    font-size: 1.2rem;
-    font-family: 'Helvetica Neue Light','Helvetica Neue' ,sans-serif;
-    font-weight: bold;
+    font-size: .9rem;
+
+    font-family: "Orbitron", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 450;
+    /* font-style: bold; */
+    /* font-size: 1rem; */
     color: #333;
 }
 .carousel-items-container {
@@ -103,4 +107,10 @@ button {
     align-items: center;
     /* gap: 45px; */ 
     /* padding: 40px; */
+  }
+  .carousel-container {
+    margin-top: 5rem;
+    position: relative;
+    width: 100%;
+    overflow: hidden;
   }
