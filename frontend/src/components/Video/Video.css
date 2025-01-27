@@ -1,0 +1,63 @@
+.banner {
+    position: relative;
+    width: 100%;
+    height: 60vh; /* Adjust the height of the banner */
+    overflow: hidden;
+  }
+  
+  .banner-video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Ensures the video fills the banner without distortion */
+    z-index: 1;
+  }
+  
+  .banner-content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    text-align: center;
+    z-index: 2; /* Ensures content is above the video */
+  }
+  
+  .banner-content h1 {
+    font-size: 2.5rem;
+    margin: 0;
+  }
+  
+  .banner-content p {
+    margin: 10px 0;
+    font-size: 1.2rem;
+  }
+  
+  .cta-buttons button {
+    margin: 10px;
+    padding: 10px 20px;
+    background: rgba(255, 255, 255, 0.8);
+    border: none;
+    cursor: pointer;
+    font-size: 1rem;
+    /* transition: background 0.3s; */
+  }
+  
+  .cta-buttons button:hover {
+    background: rgba(255, 255, 255, 1);
+  }
+  @media (max-width: 768px) {
+    .banner-content h1 {
+      font-size: 1.8rem;
+    }
+  
+    .banner-content p {
+      font-size: 1rem;
+    }
+  
+    .cta-buttons button {
+      font-size: 0.9rem;
+    }
+  }

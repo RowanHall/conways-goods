@@ -11,6 +11,7 @@ import Shop from "../pages/Shop";
 import Brands from "../pages/Brands";
 import Products from "../components/Products/Products";
 import Posts from "../components/Posts/Posts";
+import Video from "../components/Video/Video";
 
 export default function App() {
   const [message, setMessage] = useState(""); // State to hold data from API
@@ -31,6 +32,7 @@ export default function App() {
   return (
     <Router>
       <Navbar />
+      <Video />
 
       {/* Homepage */}
       <Routes>
