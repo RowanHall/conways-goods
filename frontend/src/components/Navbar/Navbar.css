@@ -1,0 +1,39 @@
+  .header {
+    border-bottom: 0.3px solid rgba(0, 0, 0, 0.1);
+    padding: 1px;
+  }
+  .navbar-div {
+    
+    display: flex;
+    justify-content: center; /* Horizontally center */
+    align-items: center; /* Vertically center */
+    border-bottom: 0.3px solid rgba(0, 0, 0, 0.1);
+    padding: 1px;
+  }
+  .nav-link-container {
+    display: flex;
+    /* justify-content: center; */
+    gap: 45px;
+  }
+  .nav-link {
+    font-size: medium;
+    font-family: 'Helvetica Neue Light','Helvetica Neue' ,sans-serif;
+    font-weight: bold;
+    color: #333;
+  }
+  .site-name {
+    display: flex;
+    justify-content: center;
+  }
+  .site-name:hover {
+    transform: scale(1.05);
+  }
+  
+  .logo-container {
+    display: flex;
+    justify-content: center;
+    padding-bottom: 2.5px;
+  }
+  .logo {
+    width: 150px;
+  }
