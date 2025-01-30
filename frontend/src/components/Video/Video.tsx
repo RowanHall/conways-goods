@@ -50,10 +50,12 @@ export default function Video() {
         </video>
         <div className="banner-content">
           <h1>THE PLATFORM FOR PERSONAL STYLE</h1>
+
           <p>
-            Buy, sell, discover authenticated pieces from the world's top
-            brands.
+            Buy, sell, discover authenticated pieces
+            <br />from the world's top brands.
           </p>
+
           <div className="cta-buttons">
             <Link to="/shop" className="video-banner-button">
               SHOP NOW

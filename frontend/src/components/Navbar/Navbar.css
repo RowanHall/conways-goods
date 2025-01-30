@@ -1,9 +1,18 @@
+  .nav-container {
+    
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1000; /* Ensure it is above other elements */
+    background-color: white; /* Ensure background color to cover content behind */
+  }
   .header {
+    /* position: fixed; */  
     border-bottom: 0.3px solid rgba(0, 0, 0, 0.1);
     padding: 1px;
   }
   .navbar-div {
-    
+    /* position: fixed; */
     display: flex;
     justify-content: center; /* Horizontally center */
     align-items: center; /* Vertically center */
@@ -35,5 +44,5 @@
     padding-bottom: 2.5px;
   }
   .logo {
-    width: 150px;
+    width: 80px;
   }

@@ -1,10 +1,13 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import "./Posts.css";
+import "./Carousel.css";
+import { Link } from "react-router-dom";
 
 interface Post {
   title: string;
   first_image_url: string;
+  id: number;
+  price: number;
 }
 
 const PostsWithImages: React.FC = () => {
@@ -34,7 +37,11 @@ const PostsWithImages: React.FC = () => {
         <div className="carousel-items-padding">
           <ul className="carousel-track">
             {posts.map((post, index) => (
-              <li key={index} className="carousel-item">
+              <Link
+                to={`/post/${post.id}`}
+                key={index}
+                className="carousel-item"
+              >
                 <img
                   src={post.first_image_url}
                   alt={post.title}
@@ -43,7 +50,7 @@ const PostsWithImages: React.FC = () => {
                 />{" "}
                 <h2 className="post-title">{post.title}</h2>
                 <h2 className="post-price">${post.price}</h2>
-              </li>
+              </Link>
             ))}
             <div className="item-heart-price"></div>
           </ul>
@@ -57,32 +64,3 @@ const PostsWithImages: React.FC = () => {
 };
 
 export default PostsWithImages;
-
-{
-  /* <div>
-  <h1>Shop</h1>
-  <div className="carousel">
-    <button className="prev">←</button>
-    <div className="carousel-track-container">
-      <ul className="carousel-track">
-        {posts.map((post, index) => (
-          <li key={index} className="carousel-item">
-            <h2>{post.title}</h2>
-            <img
-              src={post.first_image_url}
-              alt={post.title}
-              style={{
-                maxWidth: "300px",
-                border: "1px solid #ccc",
-                borderRadius: "5px",
-                padding: "5px",
-              }}
-            />
-          </li>
-        ))}
-      </ul>
-    </div>
-    <button className="next">→</button>
-  </div>
-</div>  */
-}
