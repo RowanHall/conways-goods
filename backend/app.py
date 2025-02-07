@@ -1,15 +1,16 @@
-from flask import Flask, jsonify
+from flask import Flask, jsonify, make_response
 from flask_sqlalchemy import SQLAlchemy
 from flask_cors import CORS
 import psycopg2
-
 from dotenv import load_dotenv
 import os
 
-app = Flask(__name__)
 
+app = Flask(__name__)
 # Enable CORS for all routes and all origins
 # change for production
+# CORS(app, resources={r"/api/*": {"origins": "*"}})
+# CORS(app, resources={r"/api/*": {"origins": "http://localhost:5173"}})
 CORS(app)
 
 app.config.from_object('config')
@@ -88,5 +89,50 @@ def get_products():
 def test():
     return {"message": "CORS is enabled!"}
 
+
+
+@app.route('/api/posts/<int:post_id>', methods=['GET'])
+def get_post(post_id):
+    query = """
+        SELECT
+            p.id,
+            p.title,
+            p.price,
+            pi.url AS image_url
+        FROM posts p
+        LEFT JOIN post_image pi
+            ON p.id = pi.posts_id
+        WHERE p.id = %s
+        ORDER BY pi.order_num;
+    """
+
+    try:
+        conn = get_db_connection()
+        cursor = conn.cursor()
+        
+        # Query the database for the post with the given ID and its images
+        cursor.execute(query, (post_id,))
+        results = cursor.fetchall()
+
+        if results:
+            # Initialize post data with the first row
+            post_data = {
+                'id': results[0][0],
+                'title': results[0][1],
+                'price': results[0][2],
+                'images': []
+            }
+
+            # Add images to the post data
+            for row in results:
+                if row[3]:  # Check if image_url is not None
+                    post_data['images'].append(row[3])
+
+    finally:
+        cursor.close()
+        conn.close()
+        return jsonify(post_data), 200
+        
+ 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(debug=True, port=5005)

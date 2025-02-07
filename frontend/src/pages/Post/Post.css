@@ -1,0 +1,38 @@
+.layout-container {
+    display: block;
+    flex-grow: 1;
+    width: 100%;
+    position: relative;
+
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 0;
+    padding-right: 0;
+
+    
+}
+.post-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    margin-top: 10rem;
+    
+    
+}
+.post-info-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-left: 2rem;
+    margin-right: 0;
+    
+}
+.post-images img {
+    width: 100%; /* Makes the image fill the container */
+    max-width: 1400px; 
+    height: 500px; /* Maintains aspect ratio */
+    display: block; /* Removes extra spacing */
+  }

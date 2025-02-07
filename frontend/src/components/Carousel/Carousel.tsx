@@ -16,7 +16,7 @@ const PostsWithImages: React.FC = () => {
   useEffect(() => {
     // Fetch data from the backend
     axios
-      .get("http://127.0.0.1:5000/posts/first-image") // Update with your backend endpoint
+      .get("http://127.0.0.1:5005/posts/first-image") // Update with your backend endpoint
       .then((response) => {
         console.log("Fetched posts:", response.data);
         setPosts(response.data); // Set the fetched data in state
