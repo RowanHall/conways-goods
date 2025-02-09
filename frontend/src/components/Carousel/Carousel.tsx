@@ -28,37 +28,20 @@ const PostsWithImages: React.FC = () => {
 
   return (
     <div className="carousel-container">
-      <h2 className="sub-title">Featured</h2>
-
-      <div className="carousel-items-container">
-        <div className="button-container">
-          <button className="prev">Prev</button>
-        </div>
-        <div className="carousel-items-padding">
-          <ul className="carousel-track">
-            {posts.map((post, index) => (
-              <Link
-                to={`/post/${post.id}`}
-                key={index}
-                className="carousel-item"
-              >
-                <img
-                  src={post.first_image_url}
-                  alt={post.title}
-                  className="carousel-image"
-                  style={{}}
-                />{" "}
-                <h2 className="post-title">{post.title}</h2>
-                <h2 className="post-price">${post.price}</h2>
-              </Link>
-            ))}
-            <div className="item-heart-price"></div>
-          </ul>
-        </div>
-        <div className="button-container">
-          <button className="next">Next</button>
-        </div>
-      </div>
+      <ul className="carousel-track">
+        {posts.map((post, index) => (
+          <Link to={`/post/${post.id}`} key={index} className="carousel-item">
+            <img
+              src={post.first_image_url}
+              alt={post.title}
+              className="carousel-image"
+            />{" "}
+            <h2 className="post-title">{post.title}</h2>
+            <h2 className="post-price">${post.price}</h2>
+          </Link>
+        ))}
+        <div className="item-heart-price"></div>
+      </ul>
     </div>
   );
 };

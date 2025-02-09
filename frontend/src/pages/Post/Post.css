@@ -1,20 +1,19 @@
 .layout-container {
-    display: block;
-    flex-grow: 1;
-    width: 100%;
+    flex: 1;
+    /* justify-content: center; */
+    padding: 0;
     position: relative;
-
-    max-width: 1200px;
-    margin-left: auto;
-    margin-right: auto;
-    padding-left: 0;
-    padding-right: 0;
+    width: 90vw;
+    max-width: 1400px;
+    margin: 5rem auto 0 auto;
+    box-sizing: border-box;
 
     
 }
 .post-container {
     display: flex;
     flex-direction: row;
+    flex-wrap: wrap;
     justify-content: center;
     align-items: center;
     margin-top: 10rem;
@@ -26,13 +25,66 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    /* margin-top: 10rem; */
     margin-left: 2rem;
     margin-right: 0;
     
 }
-.post-images img {
-    width: 100%; /* Makes the image fill the container */
-    max-width: 1400px; 
-    height: 500px; /* Maintains aspect ratio */
-    display: block; /* Removes extra spacing */
+.post-images {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    /* change to nowrap for other website */
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    /* transition: transform 0.3s ease-in-out; */
   }
+.post-images img {
+    height: 30em;
+    aspect-ratio: 7 / 8;
+    object-fit: cover;
+}
+.post-images-button-inner {
+    display: flex;
+    flex-direction: row;
+    /* justify-content: center;
+    align-items: center;
+    gap: 45px;
+    padding: 10px;
+    border-bottom: 0.1px solid rgba(0, 0, 0, 0.1); */
+}
+.thumbnail-container img {
+    height: 5em;
+    aspect-ratio: 7 / 8;
+    object-fit: cover;
+}
+.title {
+    display: flex;
+    /* margin-left: .8rem; */
+    font-size: 3rem;
+    font-family: "Orbitron", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 450;
+    color: #333;
+}
+.price {
+    display: flex;
+    /* margin-left: .8rem; */
+    font-size: 2rem;
+    font-family: "Orbitron", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 550;
+    color: #333;  
+}
+.click {
+    padding: 8px 12px;
+    font-size: 16px;
+    border: none;
+    background-color: #cfe0f1;
+    color: white;
+    cursor: pointer;
+    border-radius: 5px;
+}
