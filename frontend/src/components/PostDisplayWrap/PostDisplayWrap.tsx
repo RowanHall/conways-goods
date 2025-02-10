@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import "./CarouselWrap.css";
+import "./PostDisplayWrap.css";
 import { Link } from "react-router-dom";
 
 interface Post {
@@ -27,17 +27,17 @@ const PostsWithImages: React.FC = () => {
   }, []);
 
   return (
-    <div className="carousel-container">
-      <ul className="carousel-track">
+    <div className="wrap-container">
+      <ul className="wrap-track">
         {posts.map((post, index) => (
-          <Link to={`/post/${post.id}`} key={index} className="carousel-item">
+          <Link to={`/post/${post.id}`} key={index} className="wrap-item">
             <img
               src={post.first_image_url}
               alt={post.title}
-              className="carousel-image"
+              className="wrap-image"
             />{" "}
-            <h2 className="post-title">{post.title}</h2>
-            <h2 className="post-price">${post.price}</h2>
+            <h2 className="itm-title">{post.title}</h2>
+            <h2 className="itm-price">${post.price}</h2>
           </Link>
         ))}
         <div className="item-heart-price"></div>

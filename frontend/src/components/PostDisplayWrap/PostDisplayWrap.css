@@ -5,7 +5,7 @@
     margin-left: 1rem;
     color: #333;
 }
-.post-title {
+.itm-title {
     display: flex;
     /* margin-left: .8rem; */
     font-size: .9rem;
@@ -14,7 +14,7 @@
     font-weight: 450;
     color: #333;
 }
-.post-price {
+.itm-price {
   display: flex;
   /* margin-left: .8rem; */
   font-size: .9rem;
@@ -33,7 +33,7 @@
     padding: 10px;
     border-bottom: 0.1px solid rgba(0, 0, 0, 0.1);
 }
-.carousel-track {
+.wrap-track {
     display: flex;
     justify-content: flex-start;
     flex-wrap: wrap;
@@ -43,7 +43,7 @@
     transition: transform 0.3s ease-in-out;
   }
 
-.carousel-item {
+.wrap-item {
     width: 240px;
     /* min-height: 20em; */
     /* aspect-ratio: 1/1; */
@@ -52,13 +52,13 @@
     /* margin-right: 10px; */
     /* overflow: hidden; */
     }
-.carousel-item img {
+.wrap-item img {
     height: 16em;
     aspect-ratio: 7 / 8;
     object-fit: cover;
 }
 
-  .carousel-container {
+  .wrap-container {
     flex: 1;
     /* justify-content: center; */
     padding: 0;
@@ -69,7 +69,3 @@
     margin: 5rem auto 0 auto;
     box-sizing: border-box;
   }
-  .carousel-items-container {
-    display: flex;   
-    /* justify-content: center; */
-}
