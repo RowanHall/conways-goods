@@ -2,8 +2,11 @@ import "../../styles/base.css";
 import "./Navbar.css";
 import logo from "../../assets/images/logo.png";
 import { Link } from "react-router-dom";
+import { useCart } from "../../context/CartContext";
 
 export default function Navbar() {
+  const { items } = useCart();
+
   return (
     <>
       <div className="nav-container">
@@ -22,8 +25,11 @@ export default function Navbar() {
             <Link to="/shop" className="nav-link link">
               SHOP
             </Link>
-            <Link to="/cart" className="nav-link link">
+            <Link to="/cart" className="nav-link link cart-icon-container">
               <i className="fa-solid fa-cart-shopping"></i>
+              {items.length > 0 && (
+                <span className="cart-count">{items.length}</span>
+              )}
             </Link>
           </div>
         </div>

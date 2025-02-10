@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Carousel from "../../components/Carousel/Carousel";
+import { useCart } from "../../context/CartContext";
 
 // Define the type for the post data
 interface PostData {
@@ -13,6 +14,7 @@ interface PostData {
 }
 
 function Post() {
+  const { addToCart } = useCart();
   const { postId } = useParams<{ postId: string }>(); // Get post ID from the URL
 
   const [post, setPost] = useState<PostData | null>(null);
@@ -106,10 +108,21 @@ function Post() {
         </div>
 
         <div className="post-info-container">
-          {/* <h2 className="brand">{post.brand}</h2> */}
           <h2 className="title">{post.title}</h2>
           <h2 className="price">${post.price} CAD</h2>
-          <button className="add-to-cart-button">ADD TO CART</button>
+          <button
+            className="add-to-cart-button"
+            onClick={() =>
+              addToCart({
+                id: post.id,
+                title: post.title,
+                price: post.price,
+                image: post.images[0],
+              })
+            }
+          >
+            ADD TO CART
+          </button>
           <button className="message-seller-button">MESSAGE SELLER</button>
         </div>
       </div>

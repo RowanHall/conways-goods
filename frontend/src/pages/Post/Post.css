@@ -109,7 +109,7 @@
 .prev-button:hover, .next-button:hover {
     background-color: rgba(198, 198, 198, 0.7); /* darker on hover */
 }
-.add-to-cart-button {
+.add-to-cart-button, .message-seller-button {
     background-color: #ffffff;
     color: white;
     padding: 12px 24px;
@@ -122,10 +122,16 @@
     margin-top: 16px;
     transition: background-color 0.2s ease;
     width: 70%;
+    transform: scale(1);
+    transition: all 0.2s ease;
 }
 
-.add-to-cart-button:hover {
+.add-to-cart-button:hover, .message-seller-button:hover {
     background-color: #f9c7ff;
+}
+
+.add-to-cart-button:active, .message-seller-button:active {
+    transform: scale(1.05);
 }
 .thumbnail-container {
     display: flex;
@@ -136,21 +142,4 @@
 }
 .thumbnail-container img {
     margin: 10px;
-}
-.message-seller-button {
-    background-color: #ffffff;
-    color: white;
-    padding: 12px 24px;
-    border: 1.5px solid #0000007a;
-    /* border-radius: 4px; */
-    font-size: 14px;
-    font-family: "Orbitron", sans-serif;
-    color: #000000;
-    cursor: pointer;
-    margin-top: 16px;
-    transition: background-color 0.2s ease;
-    width: 70%;
-}
-.message-seller-button:hover {
-    background-color: #f9c7ff;
 }
