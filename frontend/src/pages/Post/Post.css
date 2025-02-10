@@ -24,12 +24,16 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: center;
+    align-items: left;
     /* margin-top: 10rem; */
     margin-left: 2rem;
     margin-right: 0;
-    
+    min-width: 350px;
+    /* width: 30%; */
+    /* flex: 1; */
 }
+    
+
 .post-images {
     display: flex;
     flex-direction: column;
@@ -64,19 +68,19 @@
 .title {
     display: flex;
     /* margin-left: .8rem; */
-    font-size: 3rem;
+    font-size: 1.5rem;
     font-family: "Orbitron", sans-serif;
-    font-optical-sizing: auto;
-    font-weight: 450;
+    /* font-optical-sizing: auto; */
+    font-weight: 150;
     color: #333;
 }
 .price {
     display: flex;
     /* margin-left: .8rem; */
-    font-size: 2rem;
+    font-size: 1rem;
     font-family: "Orbitron", sans-serif;
-    font-optical-sizing: auto;
-    font-weight: 550;
+    /* font-optical-sizing: auto; */
+    font-weight: 750;
     color: #333;  
 }
 .click {
@@ -87,4 +91,66 @@
     color: white;
     cursor: pointer;
     border-radius: 5px;
+}
+.prev-button, .next-button {
+    font-size: 22px;
+    font-weight: 300;
+    background-color: rgba(209, 209, 209, 0);
+    border: none;
+    padding: 8px 16px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+    margin: 0 8px;
+    height: 3.5rem; /* Prevent buttons from stretching */
+    width: 2.6rem; 
+    align-self: center; /* Center in flex container */
+}
+
+.prev-button:hover, .next-button:hover {
+    background-color: rgba(198, 198, 198, 0.7); /* darker on hover */
+}
+.add-to-cart-button {
+    background-color: #ffffff;
+    color: white;
+    padding: 12px 24px;
+    border: 1.5px solid #0000007a;
+    /* border-radius: 4px; */
+    font-size: 14px;
+    font-family: "Orbitron", sans-serif;
+    color: #000000;
+    cursor: pointer;
+    margin-top: 16px;
+    transition: background-color 0.2s ease;
+    width: 70%;
+}
+
+.add-to-cart-button:hover {
+    background-color: #f9c7ff;
+}
+.thumbnail-container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+}
+.thumbnail-container img {
+    margin: 10px;
+}
+.message-seller-button {
+    background-color: #ffffff;
+    color: white;
+    padding: 12px 24px;
+    border: 1.5px solid #0000007a;
+    /* border-radius: 4px; */
+    font-size: 14px;
+    font-family: "Orbitron", sans-serif;
+    color: #000000;
+    cursor: pointer;
+    margin-top: 16px;
+    transition: background-color 0.2s ease;
+    width: 70%;
+}
+.message-seller-button:hover {
+    background-color: #f9c7ff;
 }

@@ -2,6 +2,7 @@ import "./Post.css";
 import { useParams } from "react-router-dom";
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import Carousel from "../../components/Carousel/Carousel";
 
 // Define the type for the post data
 interface PostData {
@@ -68,7 +69,9 @@ function Post() {
           {post.images && post.images.length > 0 ? (
             <>
               <div className="post-images-button-inner">
-                <button onClick={handlePrev}>&lt;</button>
+                <button className="prev-button" onClick={handlePrev}>
+                  &lt;
+                </button>
                 {/* Main Image Display */}
                 <img
                   key={currentIndex}
@@ -77,7 +80,9 @@ function Post() {
                   className="main-image"
                 />
 
-                <button onClick={handleNext}>&gt;</button>
+                <button className="next-button" onClick={handleNext}>
+                  &gt;
+                </button>
               </div>
 
               {/* Thumbnail Image Previews */}
@@ -101,10 +106,14 @@ function Post() {
         </div>
 
         <div className="post-info-container">
+          {/* <h2 className="brand">{post.brand}</h2> */}
           <h2 className="title">{post.title}</h2>
-          <h2 className="price">${post.price}</h2>
+          <h2 className="price">${post.price} CAD</h2>
+          <button className="add-to-cart-button">ADD TO CART</button>
+          <button className="message-seller-button">MESSAGE SELLER</button>
         </div>
       </div>
+      <Carousel />
     </div>
   );
 }

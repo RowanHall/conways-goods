@@ -7,6 +7,7 @@
 }
 .post-title {
     display: flex;
+    /* margin-left: .8rem; */
     font-size: .9rem;
     font-family: "Orbitron", sans-serif;
     font-optical-sizing: auto;
@@ -15,6 +16,7 @@
 }
 .post-price {
   display: flex;
+  /* margin-left: .8rem; */
   font-size: .9rem;
   font-family: "Orbitron", sans-serif;
   font-optical-sizing: auto;
@@ -34,19 +36,22 @@
 .carousel-track {
     display: flex;
     justify-content: flex-start;
-    flex-wrap: nowrap;
+    flex-wrap: wrap;
     list-style: none;
     padding: 0;
     margin: 0;
     transition: transform 0.3s ease-in-out;
-    width: 100%;
-}
+  }
 
 .carousel-item {
-    flex: 0 0 auto;
+    width: 240px;
+    /* min-height: 20em; */
+    /* aspect-ratio: 1/1; */
     padding-right: 20px;
-    box-sizing: border-box;
-}
+    /* text-align: center; */
+    /* margin-right: 10px; */
+    /* overflow: hidden; */
+    }
 .carousel-item img {
     height: 16em;
     aspect-ratio: 7 / 8;
@@ -55,6 +60,7 @@
 
   .carousel-container {
     flex: 1;
+    /* justify-content: center; */
     padding: 0;
     position: relative;
     
@@ -62,49 +68,8 @@
     max-width: 1100px;
     margin: 5rem auto 0 auto;
     box-sizing: border-box;
-    overflow: hidden;
   }
   .carousel-items-container {
     display: flex;   
-}
-
-.carousel-nav-button {
-    position: absolute;
-    top: 35%;
-    transform: translateY(-50%);
-    background: rgba(255, 255, 255, 0.8);
-    border: 1px solid rgba(0, 0, 0, 0.1);
-    padding: 1rem;
-    cursor: pointer;
-    z-index: 2;
-}
-
-.carousel-nav-button.prev {
-    left: 0;
-    font-size: 22px;
-    font-weight: 300;
-    background-color: rgba(255, 255, 255, 0.679);
-    border: none;
-    padding: 8px 16px;
-    cursor: pointer;
-    transition: background-color 0.2s ease;
-    margin: 0 8px;
-    height: 3.5rem; /* Prevent buttons from stretching */
-    width: 2.6rem; 
-    align-self: center; /* Center in flex container */
-}
-
-.carousel-nav-button.next {
-    right: 0;
-    font-size: 22px;
-    font-weight: 300;
-    background-color: rgba(209, 209, 209, 0);
-    border: none;
-    padding: 8px 16px;
-    cursor: pointer;
-    transition: background-color 0.2s ease;
-    margin: 0 8px;
-    height: 3.5rem; /* Prevent buttons from stretching */
-    width: 2.6rem; 
-    align-self: center; /* Center in flex container */
+    /* justify-content: center; */
 }

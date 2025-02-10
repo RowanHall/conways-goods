@@ -3,6 +3,7 @@
     position: fixed;
     top: 0;
     width: 100%;
+    
     z-index: 1000; /* Ensure it is above other elements */
     background-color: white; /* Ensure background color to cover content behind */
   }

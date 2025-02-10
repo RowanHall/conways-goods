@@ -1,20 +1,22 @@
 .bottom-banner{
+  display: flex;
+  position: fixed;
+  
+    /* margin-top: 25px; */
     padding: 10px;
-    display: flex;
     justify-content: space-between;
     align-items: flex-end;
     border-top: 0.1px solid rgba(0, 0, 0, 0.1);
+    position: relative;
+    bottom: 0;
     
-  
   }
   .bottom-banner-socials{
-  
-    display: flex;
+     display: flex;
     align-items: center;
     gap: 45px;
     font-size: .80em;
     padding-left: 22.5px;
-  
   }
   .bottom-banner-site-links-container {
     display: flex;
