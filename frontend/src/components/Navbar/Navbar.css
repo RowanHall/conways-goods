@@ -27,7 +27,8 @@
   }
   .nav-link {
     font-size: medium;
-    font-family: 'Helvetica Neue Light','Helvetica Neue' ,sans-serif;
+    /* font-family: 'Helvetica Neue Light','Helvetica Neue' ,sans-serif; */
+    
     font-weight: bold;
     color: #333;
   }
@@ -63,4 +64,13 @@
     font-size: 12px;
     min-width: 15px;
     text-align: center;
+  }
+  .shop-link {
+    font-size: medium;
+    font-family: 'Orbitron', sans-serif;
+    font-weight: bold;
+    color: #333;
+  }
+  .shop-link:hover, .cart-icon-container:hover {
+    transform: scale(1.05);
   }

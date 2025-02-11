@@ -49,19 +49,17 @@ export default function Video() {
           Your browser does not support the video tag.
         </video>
         <div className="banner-content">
-          <h1>THE PLATFORM FOR PERSONAL STYLE</h1>
+          <h1>WHERE STYLE TELLS YOUR STORY</h1>
 
           <p>
-            Buy, sell, discover authenticated pieces
-            <br />from the world's top brands.
+            Curate, trade, and celebrate one-of-a-kind finds
+            <br />
+            from the world’s most coveted designers.
           </p>
 
           <div className="cta-buttons">
             <Link to="/shop" className="video-banner-button">
-              SHOP NOW
-            </Link>
-            <Link to="/brands" className="video-banner-button">
-              BRANDS
+              DISCOVER NOW
             </Link>
           </div>
         </div>

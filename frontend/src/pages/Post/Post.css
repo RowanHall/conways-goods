@@ -110,6 +110,9 @@
     background-color: rgba(198, 198, 198, 0.7); /* darker on hover */
 }
 .add-to-cart-button, .message-seller-button {
+    display: flex;
+    justify-content: center;
+    /* align-self: center; */
     background-color: #ffffff;
     color: white;
     padding: 12px 24px;

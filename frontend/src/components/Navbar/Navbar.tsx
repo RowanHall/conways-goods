@@ -19,10 +19,7 @@ export default function Navbar() {
         </header>
         <div className="navbar-div">
           <div className="nav-link-container">
-            <Link to="/brands" className="nav-link link">
-              BRANDS
-            </Link>
-            <Link to="/shop" className="nav-link link">
+            <Link to="/shop" className="nav-link link shop-link">
               SHOP
             </Link>
             <Link to="/cart" className="nav-link link cart-icon-container">

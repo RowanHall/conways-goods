@@ -123,7 +123,12 @@ function Post() {
           >
             ADD TO CART
           </button>
-          <button className="message-seller-button">MESSAGE SELLER</button>
+          <a
+            href="https://www.instagram.com/direct/t/17842351421346689"
+            className="message-seller-button"
+          >
+            MESSAGE SELLER
+          </a>
         </div>
       </div>
       <Carousel />
