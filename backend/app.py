@@ -1,4 +1,4 @@
-from flask import Flask, jsonify, make_response
+from flask import Flask, jsonify, make_response, request
 from flask_sqlalchemy import SQLAlchemy
 from flask_cors import CORS
 import psycopg2
@@ -28,7 +28,7 @@ def get_db_connection():
     return conn
 
 def get_first_image_of_posts():
-    query = """
+    base_query = """
         SELECT
             p.title,
             p.price,
@@ -39,13 +39,48 @@ def get_first_image_of_posts():
             ON p.id = pi.posts_id
         WHERE pi.order_num = 1;
     """
+    conditions = []
+    params = []
+    
+    # Get filter parameters from request
+    min_price = request.args.get('minPrice')
+    max_price = request.args.get('maxPrice')
+    category = request.args.get('category')
+    designer = request.args.get('designer')
+    
+    # Add price filter conditions
+    if min_price:
+        conditions.append("p.price >= %s")
+        params.append(float(min_price))
+    if max_price:
+        conditions.append("p.price <= %s")
+        params.append(float(max_price))
+    
+    # # Add category filter condition
+    # if category and category != 'all':
+    #     conditions.append("p.category = %s")
+    #     params.append(category)
+    
+    # # Add designer filter condition
+    # if designer and designer != 'all':
+    #     conditions.append("p.designer = %s")
+    #     params.append(designer)
+    
+    # Combine all conditions
+    if conditions:
+        base_query += " AND " + " AND ".join(conditions)
+    print("Final query:", base_query)
+    print("Parameters:", params)
     try:
         # Connect to the database
         conn = get_db_connection()
         cur = conn.cursor()
 
         # Execute the query
-        cur.execute(query)
+        if params:
+            cur.execute(base_query, params)
+        else:
+            cur.execute(base_query)
         results = cur.fetchall()
 
         # Convert results into a list of dictionaries
