@@ -114,6 +114,12 @@
   font-weight: 450;
   color: #141414;
 }
+
+.cart-summary .paypal-buttons {
+  /* width: 100%; */
+  max-width: 190px;
+  margin: 20px 0;
+}
     
 
 

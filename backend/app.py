@@ -4,7 +4,10 @@ from flask_cors import CORS
 import psycopg2
 from dotenv import load_dotenv
 import os
+import requests
 
+# Load environment variables
+load_dotenv()
 
 app = Flask(__name__)
 # Enable CORS for all routes and all origins
@@ -16,6 +19,11 @@ CORS(app)
 app.config.from_object('config')
 
 db = SQLAlchemy(app)
+
+# Add PayPal configuration
+PAYPAL_CLIENT_ID = os.getenv("PAYPAL_CLIENT_ID", "YOUR_PAYPAL_CLIENT_ID")
+PAYPAL_SECRET = os.getenv("PAYPAL_SECRET", "YOUR_PAYPAL_SECRET")
+PAYPAL_API = "https://api-m.sandbox.paypal.com"  # Use "https://api-m.paypal.com" for production
 
 # Database connection function
 def get_db_connection():
@@ -100,7 +108,15 @@ def get_first_image_of_posts():
     except Exception as e:
         return {"error": f"An error occurred: {str(e)}"}
 
-
+def get_paypal_access_token():
+    """ Get an access token from PayPal """
+    auth = (PAYPAL_CLIENT_ID, PAYPAL_SECRET)
+    response = requests.post(
+        f"{PAYPAL_API}/v1/oauth2/token",
+        auth=auth,
+        data={"grant_type": "client_credentials"}
+    )
+    return response.json().get("access_token")
 
 @app.route('/posts/first-image', methods=['GET'])
 def get_posts_with_images():
@@ -123,8 +139,6 @@ def get_products():
 @app.route('/api/test', methods=['GET'])
 def test():
     return {"message": "CORS is enabled!"}
-
-
 
 @app.route('/api/posts/<int:post_id>', methods=['GET'])
 def get_post(post_id):
@@ -167,7 +181,30 @@ def get_post(post_id):
         cursor.close()
         conn.close()
         return jsonify(post_data), 200
+
+@app.route("/paypal/capture", methods=["POST"])
+def capture_payment():
+    """ Capture PayPal payment """
+    try:
+        data = request.json
+        order_id = data.get("orderID")
         
- 
+        if not order_id:
+            return jsonify({"error": "No order ID provided"}), 400
+
+        headers = {
+            "Content-Type": "application/json",
+            "Authorization": f"Bearer {get_paypal_access_token()}"
+        }
+        
+        response = requests.post(
+            f"{PAYPAL_API}/v2/checkout/orders/{order_id}/capture",
+            headers=headers
+        )
+        
+        return jsonify(response.json()), response.status_code
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
+
 if __name__ == "__main__":
     app.run(debug=True, port=5005)

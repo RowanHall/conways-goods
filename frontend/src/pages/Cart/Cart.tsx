@@ -1,13 +1,10 @@
 import { useCart } from "../../context/CartContext";
 import "./Cart.css";
 import Carousel from "../../components/Carousel/Carousel";
+import PayPalCheckout from "../../components/PayPalCheckout/PayPalCheckout";
 
 export default function Cart() {
   const { items, removeFromCart, total } = useCart();
-
-  const handlePurchase = () => {
-    alert("Purchase functionality coming soon!");
-  };
 
   if (items.length === 0) {
     return <div className="cart-empty">Your cart is empty</div>;
@@ -42,9 +39,7 @@ export default function Cart() {
         </div>
         <div className="cart-summary">
           <h2 className="total-price">Total: ${total.toFixed(2)}</h2>
-          <button className="purchase-button" onClick={handlePurchase}>
-            Purchase
-          </button>
+          {total > 0 && <PayPalCheckout amount={total} />}
         </div>
       </div>
       <Carousel />
