@@ -45,68 +45,72 @@ def get_first_image_of_posts():
         FROM posts p
         LEFT JOIN post_image pi
             ON p.id = pi.posts_id
-        WHERE pi.order_num = 1;
+        WHERE pi.order_num = 1
     """
     conditions = []
     params = []
     
-    # Get filter parameters from request
+    # Get filter parameters from request URL
     min_price = request.args.get('minPrice')
     max_price = request.args.get('maxPrice')
     category = request.args.get('category')
     designer = request.args.get('designer')
     
-    # Add price filter conditions
-    if min_price:
-        conditions.append("p.price >= %s")
-        params.append(float(min_price))
-    if max_price:
-        conditions.append("p.price <= %s")
-        params.append(float(max_price))
+    try:
+        # Price filters
+        if min_price and min_price.strip():
+            conditions.append("p.price >= %s")
+            params.append(float(min_price))
+        if max_price and max_price.strip():
+            conditions.append("p.price <= %s")
+            params.append(float(max_price))
+            
+        # Category filter
+        if category and category != 'all':
+            conditions.append("p.category = %s")
+            params.append(category)
+            
+        # Designer filter
+        if designer and designer != 'all':
+            conditions.append("p.designer = %s")
+            params.append(designer)
+            
+    except ValueError:
+        pass
     
-    # # Add category filter condition
-    # if category and category != 'all':
-    #     conditions.append("p.category = %s")
-    #     params.append(category)
-    
-    # # Add designer filter condition
-    # if designer and designer != 'all':
-    #     conditions.append("p.designer = %s")
-    #     params.append(designer)
-    
-    # Combine all conditions
+    # Add conditions to base query if any filters are applied
     if conditions:
         base_query += " AND " + " AND ".join(conditions)
-    print("Final query:", base_query)
-    print("Parameters:", params)
+
     try:
-        # Connect to the database
         conn = get_db_connection()
         cur = conn.cursor()
-
-        # Execute the query
+        
         if params:
             cur.execute(base_query, params)
         else:
             cur.execute(base_query)
         results = cur.fetchall()
 
-        # Convert results into a list of dictionaries
         data = [
-            {"title": row[0], "price": row[1], "first_image_url": row[2], "id": row[3]}
+            {
+                "title": row[0],
+                "price": float(row[1]),
+                "first_image_url": row[2],
+                "id": row[3]
+            }
             for row in results
         ]
-
-        # Clean up
-        cur.close()
-        conn.close()
-
-        return data
-
-    except psycopg2.Error as e:
-        return {"error": f"Database error: {str(e)}"}
+        
+        return jsonify(data)
     except Exception as e:
-        return {"error": f"An error occurred: {str(e)}"}
+        print(f"Error in get_first_image_of_posts: {str(e)}")
+        return jsonify({"error": str(e)}), 500
+    finally:
+        if 'cur' in locals():
+            cur.close()
+        if 'conn' in locals():
+            conn.close()
 
 def get_paypal_access_token():
     """ Get an access token from PayPal """
@@ -121,7 +125,7 @@ def get_paypal_access_token():
 @app.route('/posts/first-image', methods=['GET'])
 def get_posts_with_images():
     data = get_first_image_of_posts()
-    return jsonify(data)
+    return data
 
 @app.route('/api/products', methods=['GET'])
 def get_products():
@@ -147,6 +151,7 @@ def get_post(post_id):
             p.id,
             p.title,
             p.price,
+            p.description,
             pi.url AS image_url
         FROM posts p
         LEFT JOIN post_image pi
@@ -159,28 +164,29 @@ def get_post(post_id):
         conn = get_db_connection()
         cursor = conn.cursor()
         
-        # Query the database for the post with the given ID and its images
         cursor.execute(query, (post_id,))
         results = cursor.fetchall()
 
         if results:
-            # Initialize post data with the first row
             post_data = {
                 'id': results[0][0],
                 'title': results[0][1],
                 'price': results[0][2],
+                'description': results[0][3],
                 'images': []
             }
 
-            # Add images to the post data
             for row in results:
-                if row[3]:  # Check if image_url is not None
-                    post_data['images'].append(row[3])
+                if row[4]:  # Image URL is now at index 4
+                    post_data['images'].append(row[4])
 
+            return jsonify(post_data), 200
+    except Exception as e:
+        print(f"Error in get_post: {str(e)}")
+        return jsonify({"error": str(e)}), 500
     finally:
         cursor.close()
         conn.close()
-        return jsonify(post_data), 200
 
 @app.route("/paypal/capture", methods=["POST"])
 def capture_payment():

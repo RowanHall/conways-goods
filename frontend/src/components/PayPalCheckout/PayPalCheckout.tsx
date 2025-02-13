@@ -16,7 +16,7 @@ const PayPalCheckout = ({ amount }: PayPalCheckoutProps) => {
       }}
     >
       <PayPalButtons
-        style={{ layout: "horizontal" }} // Add styling
+        style={{ layout: "horizontal" }}
         createOrder={(data, actions) => {
           return actions.order!.create({
             intent: "CAPTURE",

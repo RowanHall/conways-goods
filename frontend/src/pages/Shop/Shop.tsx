@@ -26,10 +26,9 @@ export default function Shop() {
 
   const handlePriceChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
-    // Only allow numbers and empty string
-    if (value === "" || /^\d+$/.test(value)) {
+    // Allow empty string or numbers (including decimals)
+    if (value === "" || /^\d*\.?\d*$/.test(value)) {
       handleFilterChange(name as "minPrice" | "maxPrice", value);
-      console.log("Price filter updated:", name, value);
     }
   };
 
@@ -85,9 +84,7 @@ export default function Shop() {
             onChange={(e) => handleFilterChange("designer", e.target.value)}
           >
             <option value="all">All Designers</option>
-            <option value="nike">Nike</option>
-            <option value="adidas">Adidas</option>
-            <option value="puma">Puma</option>
+            <option value="bape">Bape</option>
           </select>
         </div>
       </div>

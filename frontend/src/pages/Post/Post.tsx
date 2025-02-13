@@ -10,6 +10,7 @@ interface PostData {
   id: number;
   title: string;
   price: number;
+  description: string;
   images: string[];
 }
 
@@ -108,27 +109,31 @@ function Post() {
         </div>
 
         <div className="post-info-container">
-          <h2 className="title">{post.title}</h2>
-          <h2 className="price">${post.price} CAD</h2>
-          <button
-            className="add-to-cart-button"
-            onClick={() =>
-              addToCart({
-                id: post.id,
-                title: post.title,
-                price: post.price,
-                image: post.images[0],
-              })
-            }
-          >
-            ADD TO CART
-          </button>
-          <a
-            href="https://www.instagram.com/direct/t/17842351421346689"
-            className="message-seller-button"
-          >
-            MESSAGE SELLER
-          </a>
+          <div className="post-info-container-inner">
+            <h2 className="title">{post.title}</h2>
+            <h2 className="price">${post.price} CAD</h2>
+
+            <button
+              className="add-to-cart-button"
+              onClick={() =>
+                addToCart({
+                  id: post.id,
+                  title: post.title,
+                  price: post.price,
+                  image: post.images[0],
+                })
+              }
+            >
+              ADD TO CART
+            </button>
+            <a
+              href="https://www.instagram.com/direct/t/17842351421346689"
+              className="message-seller-button"
+            >
+              MESSAGE SELLER
+            </a>
+            <p className="description">{post.description}</p>
+          </div>
         </div>
       </div>
       <Carousel />
