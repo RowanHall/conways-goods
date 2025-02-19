@@ -14,7 +14,8 @@ def get_presigned_url_service():
         cur.execute('SELECT role FROM users WHERE id = %s', (current_user_id,))
         user = cur.fetchone()
         
-        if not user or user[0] != 'admin':
+        current_user_role = user[0]
+        if not user or current_user_role != 'admin':
             return jsonify({'error': 'Unauthorized'}), 403
             
         filename = request.args.get('filename')
@@ -26,14 +27,14 @@ def get_presigned_url_service():
         # Validate file extension
         allowed_extensions = {'png', 'jpg', 'jpeg'}
         try:
-            ext = filename.rsplit('.', 1)[1].lower()
-            if ext not in allowed_extensions:
+            file_extention = filename.rsplit('.', 1)[1].lower()
+            if file_extention not in allowed_extensions:
                 return jsonify({'error': f'Invalid file type. Allowed types: {", ".join(allowed_extensions)}'}), 422
         except IndexError:
             return jsonify({'error': 'Invalid filename format'}), 422
 
         # Generate unique filename
-        unique_filename = f"uploads/{current_user_id}/{uuid.uuid4()}.{ext}"
+        unique_filename = f"uploads/{current_user_id}/{uuid.uuid4()}.{file_extention}"
 
         # Generate presigned URL with minimal conditions
         presigned_post = s3.generate_presigned_post(

@@ -1,12 +1,12 @@
-import React, { useState } from 'react';
-import { useAuth } from '../../context/AuthContext';
-import { useNavigate } from 'react-router-dom';
-import './Login.css';
+import React, { useState } from "react";
+import { useAuth } from "../../context/AuthContext";
+import { useNavigate } from "react-router-dom";
+import "./Login.css";
 
 const Login = () => {
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
-  const [error, setError] = useState('');
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
   const { login } = useAuth();
   const navigate = useNavigate();
 
@@ -14,16 +14,16 @@ const Login = () => {
     e.preventDefault();
     try {
       await login(username, password);
-      navigate('/admin');
+      navigate("/admin");
     } catch (error) {
-      setError('Invalid credentials');
+      setError("Invalid credentials");
     }
   };
 
   return (
     <div className="login-container">
       <form onSubmit={handleSubmit} className="login-form">
-        <h2>Admin Login</h2>
+        <h2 className="login-title">ADMIN LOGIN</h2>
         {error && <div className="error-message">{error}</div>}
         <div className="form-group">
           <label>Username</label>
@@ -47,4 +47,4 @@ const Login = () => {
   );
 };
 
-export default Login; 
+export default Login;

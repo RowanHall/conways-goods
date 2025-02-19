@@ -22,7 +22,9 @@
   }
   .nav-link-container {
     display: flex;
-    /* justify-content: center; */
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
     gap: 45px;
   }
   .nav-link {
@@ -74,3 +76,21 @@
   .shop-link:hover, .cart-icon-container:hover {
     transform: scale(1.05);
   }
+  .logout-button {
+    display: flex;
+    justify-content: center;
+    background-color: #ffffff;
+    font-family: "Orbitron", sans-serif;
+    color: #000000;
+    cursor: pointer;
+    max-width: 100px;
+    max-height: 50px; 
+    transform: scale(1);
+    transition: color 0.2s ease;
+    flex: 1;
+  }
+  .logout-button:hover {
+    color: #8d5292;
+    background-color: #ffffff;
+  }
+  

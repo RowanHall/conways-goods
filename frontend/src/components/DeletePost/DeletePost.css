@@ -1,0 +1,24 @@
+.delete-post-button {
+  display: flex;
+  justify-content: center;
+  background-color: #ffffff;
+  padding: 12px 24px;
+  border: 1.5px solid #ff0000;
+  font-size: 14px;
+  font-family: "Orbitron", sans-serif;
+  color: #ff0000;
+  cursor: pointer;
+  margin-top: 16px;
+  transition: all 0.2s ease;
+  width: 100%;
+}
+
+.delete-post-button:hover {
+  background-color: #ff0000;
+  color: #ffffff;
+}
+
+.delete-post-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}

@@ -29,27 +29,26 @@ export default function Navbar() {
                 <span className="cart-count">{items.length}</span>
               )}
             </Link>
-            <div className="nav-auth">
-              {isAuthenticated ? (
-                <>
-                  {isAdmin && (
-                    <Link to="/admin" className="nav-link">
-                      Admin Panel
-                    </Link>
-                  )}
-                  <button onClick={logout} className="nav-link">
-                    Logout
-                  </button>
-                </>
-              ) : (
-                <Link to="/login" className="nav-link">
-                  Login
-                </Link>
-              )}
-            </div>
-            {/* <Link to="/login" className="nav-link link login-link">
-              Login
-            </Link> */}
+
+            {isAuthenticated ? (
+              <>
+                {isAdmin && (
+                  <Link to="/admin" className="nav-link shop-link link">
+                    ADMIN PANEL
+                  </Link>
+                )}
+                <button
+                  onClick={logout}
+                  className="nav-link shop-link link logout-button"
+                >
+                  LOGOUT
+                </button>
+              </>
+            ) : (
+              <Link to="/login" className="nav-link shop-link link">
+                LOGIN
+              </Link>
+            )}
           </div>
         </div>
       </div>

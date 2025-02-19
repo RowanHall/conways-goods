@@ -83,3 +83,9 @@
       margin: 1rem;
     }
   }
+  .login-title {
+    font-size: 1.7rem;
+    font-weight: 600;
+    color: #333;
+    font-family: "Orbitron", sans-serif;
+  }

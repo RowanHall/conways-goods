@@ -1,7 +1,10 @@
 from flask import request, jsonify, make_response
 from app.utils.db import get_db_connection
 from flask_jwt_extended import get_jwt_identity
-
+from app.extensions import s3
+from config import DevelopmentConfig
+from flask import current_app
+from app.services.auth_service import get_current_user_service
 def post_previewer_service():
     base_query = """
     SELECT
@@ -179,3 +182,69 @@ def create_post_service():
     finally:
         cur.close()
         conn.close()
+
+def delete_post_service(post_id):
+    try:
+        response, status_code = get_current_user_service()
+
+        if status_code != 200:
+            return status_code
+
+        current_user_data = response.json
+
+        current_user_id = current_user_data['user_id']
+        current_user_role = current_user_data['user_role']
+        
+        conn = get_db_connection()
+        cur = conn.cursor()
+
+        # 1. Check if the post exists and belongs to the current user
+        cur.execute('SELECT user_id FROM posts WHERE id = %s', (post_id,))
+        post_tuple = cur.fetchone()
+
+        if not post_tuple:
+            return jsonify({'error': 'Post not found'}), 404
+
+        post_user_id = post_tuple[0]
+        current_user_id = int(current_user_id)
+
+        if post_user_id != current_user_id and current_user_role != 'admin':
+            return jsonify({'error': 'Unauthorized'}), 403
+
+        # 2. Fetch the associated image URLs from post_image
+        cur.execute('SELECT url FROM post_image WHERE posts_id = %s', (post_id,))
+        image_rows = cur.fetchall()  # each row is a tuple, e.g. (url_value,)
+
+        # 3. Delete each image from S3
+        for row in image_rows:
+            image_url = row[0]
+            try:
+                # Parse out the S3 key from the image URL (assuming .amazonaws.com/ is in the URL)
+                key = image_url.split('.amazonaws.com/')[1]
+                s3.delete_object(
+                    Bucket=DevelopmentConfig.BUCKET_NAME,
+                    Key=key
+                )
+            except Exception as e:
+                current_app.logger.error(f"Error deleting S3 object: {str(e)}")
+
+        # 4. Delete image records from post_image
+        cur.execute('DELETE FROM post_image WHERE posts_id = %s', (post_id,))
+
+        # 5. Finally, delete the post itself
+        cur.execute('DELETE FROM posts WHERE id = %s', (post_id,))
+        conn.commit()
+
+        return jsonify({'message': 'Post deleted successfully'}), 200
+
+    except Exception as e:
+        if conn:
+            conn.rollback()
+        current_app.logger.error(f"Error deleting post: {str(e)}")
+        return jsonify({'error': str(e)}), 500
+
+    finally:
+        if cur:
+            cur.close()
+        if conn:
+            conn.close()

@@ -2,7 +2,7 @@
 from flask import jsonify
 from app.utils.db import get_db_connection
 from bcrypt import hashpw, checkpw, gensalt
-from flask_jwt_extended import create_access_token, get_jwt_identity
+from flask_jwt_extended import create_access_token, get_jwt_identity, get_jwt
 
 def login_service(data):
         username = data.get('username')
@@ -15,16 +15,21 @@ def login_service(data):
             # Query user with role
             cur.execute('SELECT id, password_hash, role FROM users WHERE username = %s', (username,))
             user = cur.fetchone()
-            
-            if user and checkpw(password.encode('utf-8'), user[1].encode('utf-8')):
+
+            user_id = user[0]
+            user_password = user[1]
+            user_role = user[2]
+
+            if user and checkpw(password.encode('utf-8'), user_password.encode('utf-8')):
                 # Create identity as a string instead of a dict
-                identity = str(user[0])  # Convert user ID to string
-                access_token = create_access_token(identity=identity)
+                identity = str(user_id)  # Convert user ID to string
+                access_token = create_access_token(identity=identity,
+                                                    additional_claims={"role": user[2]})
                 
                 return jsonify({
                     'token': access_token,
-                    'is_admin': user[2] == 'admin',
-                    'user_id': user[0]
+                    'is_admin': user_role == 'admin',
+                    'user_id': user_id
                 }), 200
             return jsonify({'error': 'Invalid credentials'}), 401
             
@@ -73,5 +78,7 @@ def register_service(data):
         conn.close()
 
 def get_current_user_service():
-    current_user = get_jwt_identity()
-    return jsonify(current_user), 200
+    user_id = get_jwt_identity()
+    claims = get_jwt()
+    user_role = claims.get("role")
+    return jsonify({"user_id": user_id, "user_role": user_role}), 200

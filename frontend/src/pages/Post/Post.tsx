@@ -4,6 +4,8 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Carousel from "../../components/Carousel/Carousel";
 import { useCart } from "../../context/CartContext";
+import DeletePost from "../../components/DeletePost/DeletePost";
+import { useAuth } from "../../context/AuthContext";
 
 // Define the type for the post data
 interface PostData {
@@ -12,11 +14,14 @@ interface PostData {
   price: number;
   description: string;
   images: string[];
+  userId: number;
 }
 
 function Post() {
   const { addToCart } = useCart();
   const { postId } = useParams<{ postId: string }>(); // Get post ID from the URL
+  const { isAuthenticated } = useAuth();
+  const [currentUserId, setCurrentUserId] = useState<number | null>(null);
 
   const [post, setPost] = useState<PostData | null>(null);
   const [loading, setLoading] = useState(true);
@@ -31,7 +36,11 @@ function Post() {
         );
         setPost(response.data);
       } catch (error) {
-        setError(error.message);
+        if (error instanceof Error) {
+          setError(error.message);
+        } else {
+          setError("An unknown error occurred");
+        }
       } finally {
         setLoading(false);
       }
@@ -39,6 +48,24 @@ function Post() {
 
     fetchPost();
   }, [postId]);
+
+  useEffect(() => {
+    // Fetch current user ID if authenticated
+    if (isAuthenticated) {
+      axios
+        .get("http://localhost:5005/api/me", {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        })
+        .then((response) => {
+          setCurrentUserId(response.data.id);
+        })
+        .catch((error) => {
+          console.error("Error fetching user:", error);
+        });
+    }
+  }, [isAuthenticated]);
 
   // Handle Next button click
   const handleNext = () => {
@@ -132,6 +159,7 @@ function Post() {
             >
               MESSAGE SELLER
             </a>
+            {currentUserId === post.userId && <DeletePost postId={post.id} />}
             <p className="description">{post.description}</p>
           </div>
         </div>
