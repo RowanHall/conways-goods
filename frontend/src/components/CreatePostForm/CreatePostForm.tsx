@@ -12,7 +12,19 @@ const CATEGORIES = [
   "Other",
 ];
 
-const DESIGNERS = ["Nike", "Adidas", "Stussy", "Supreme", "Palace", "Other"];
+const DESIGNERS = [
+  "Stussy",
+  "Supreme",
+  "Palace",
+  "Other",
+  "Bape",
+  "Yeezy",
+  "Fear of God",
+  "Louis Vuitton",
+  "Gucci",
+  "Dior",
+  "Fendi",
+];
 
 const CreatePostForm = () => {
   const [formData, setFormData] = useState({
@@ -115,14 +127,11 @@ const CreatePostForm = () => {
       );
 
       // Create post with image URLs
-      const response = await axios.post(
-        "http://localhost:5005/api/posts/create",
-        {
-          ...formData,
-          price: parseFloat(formData.price),
-          images: imageUrls,
-        }
-      );
+      await axios.post("http://localhost:5005/api/posts/create", {
+        ...formData,
+        price: parseFloat(formData.price),
+        images: imageUrls,
+      });
 
       setSuccess(true);
       setFormData({

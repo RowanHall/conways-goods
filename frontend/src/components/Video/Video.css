@@ -2,10 +2,16 @@
     position: relative;
     width: 100%;
     height: 60vh; /* Adjust the height of the banner */
-    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex: 1;
   }
   
   .banner-video {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     position: absolute;
     top: 0;
     left: 0;
@@ -15,73 +21,63 @@
     object-fit: cover; /* Ensures the video fills the banner without distortion */
     z-index: 1;
     filter: brightness(0.6);
+    flex: 1;
   }
   
   .banner-content {
     position: absolute;
     display: flex;
+    width: 100%;
     flex-direction: column;
     top: 60%;
     left: 50%;
     transform: translate(-50%, -50%);
     color: white;
     text-align: center;
-    z-index: 2; /* Ensures content is above the video */
+    z-index: 2;
+    flex: 1;
+    overflow: hidden; /* Prevents overflow */
+    max-width: 90%; /* Ensures content doesn't exceed container */
+    align-items: center; /* Center items horizontally */
+    justify-content: center; /* Center items vertically */
   }
   
   .banner-content h1 {
-    font-size: 2.2rem;
-    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex: 1;
+
+    font-size: clamp(1.5rem, 3vh, 2rem);
+    white-space: nowrap; /* Prevents text wrapping */
+    max-width: 100%; /* Ensures it does not exceed the container */
   }
   
   .banner-content p {
-    margin: 10px 0 60px;
-    font-size: 1.2rem;
+    margin: 10px 0 30px;
+    font-size: clamp(1.1rem, 2vh, 1.5rem);
+    white-space: nowrap; /* Prevents text wrapping */
+    max-width: 100%; /* Ensures it does not exceed the container */
   }
   
   .video-banner-button {
-    /* display: inline-block; */
-    margin-top: 4rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     border: 1.5px solid white;
     padding: 10px 20px;
     color: white;
-    /* text-decoration: none; */
-    /* position: relative; */
     margin: 10px;
-    /* padding: 8px 16px; */
-    
-    /* padding-inline: 60px; */
-    /* background: rgba(255, 255, 255, 0.8); */
-    /* border: none; */
-    /* cursor: pointer; */
     font-family: "Orbitron", sans-serif;
     font-optical-sizing: auto;
     font-weight: 400;
     font-style: normal;
     font-size: 1rem;
+    width: 100%;
     transition: all 0.3s ease;
   }
   
   .video-banner-button:hover {
     background: rgb(153, 106, 184);
     border: none;
-    /* background-color: white;
-    color: black; */
-  }
-  @media (max-width: 768px) {
-    .banner-content h1 {
-      font-size: 1.8rem;
-    }
-  
-    .banner-content p {
-      font-size: 1rem;
-    }
-  
-    .cta-buttons button {
-      /* margin-top: 20px; */
-      font-size: 0.9rem;
-    }
-    .cta-buttons {
-      /* make buttons lower on the page */
-    }
   }

@@ -158,8 +158,8 @@ def create_post_service():
             data['price'],
             data.get('description', ''),
             current_user,  # Use the user ID directly
-            data.get('category'),
-            data.get('designer')
+            data.get('category').lower(),
+            data.get('designer').lower()
         ))
         
         post_id = cur.fetchone()[0]

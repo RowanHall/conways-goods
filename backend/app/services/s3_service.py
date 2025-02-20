@@ -1,21 +1,23 @@
 from flask import request, jsonify, current_app
-from flask_jwt_extended import get_jwt_identity
-from app.utils.db import get_db_connection
 from app.extensions import s3
 from config import DevelopmentConfig
 import uuid
+from app.api.auth import get_current_user_service
 
 def get_presigned_url_service():
     try:
-        current_user_id = get_jwt_identity()
         
-        conn = get_db_connection()
-        cur = conn.cursor()
-        cur.execute('SELECT role FROM users WHERE id = %s', (current_user_id,))
-        user = cur.fetchone()
-        
-        current_user_role = user[0]
-        if not user or current_user_role != 'admin':
+        response, status_code = get_current_user_service()
+
+        if status_code != 200:
+            return status_code
+
+        current_user_data = response.json
+
+        current_user_id = current_user_data['user_id']
+        current_user_role = current_user_data['user_role']
+         
+        if current_user_role != 'admin':
             return jsonify({'error': 'Unauthorized'}), 403
             
         filename = request.args.get('filename')
@@ -59,8 +61,8 @@ def get_presigned_url_service():
     except Exception as e:
         current_app.logger.error(f"Error generating presigned URL: {str(e)}")
         return jsonify({'error': str(e)}), 500
-    finally:
-        if 'cur' in locals():
-            cur.close()
-        if 'conn' in locals():
-            conn.close()
+    # finally:
+    #     if 'cur' in locals():
+    #         cur.close()
+    #     if 'conn' in locals():
+    #         conn.close()

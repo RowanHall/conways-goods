@@ -17,7 +17,7 @@ const PayPalCheckout = ({ amount }: PayPalCheckoutProps) => {
     >
       <PayPalButtons
         style={{ layout: "horizontal" }}
-        createOrder={(data, actions) => {
+        createOrder={(_data, actions) => {
           return actions.order!.create({
             intent: "CAPTURE",
             purchase_units: [
@@ -30,7 +30,7 @@ const PayPalCheckout = ({ amount }: PayPalCheckoutProps) => {
             ],
           });
         }}
-        onApprove={(data, actions) => {
+        onApprove={(_data, actions) => {
           return actions.order!.capture().then((details) => {
             console.log(
               "Transaction completed by: ",

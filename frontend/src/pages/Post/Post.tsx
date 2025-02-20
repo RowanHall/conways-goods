@@ -1,6 +1,6 @@
 import "./Post.css";
 import { useParams } from "react-router-dom";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
 import Carousel from "../../components/Carousel/Carousel";
 import { useCart } from "../../context/CartContext";

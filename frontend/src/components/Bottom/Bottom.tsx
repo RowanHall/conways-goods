@@ -6,21 +6,13 @@ export default function Bottom() {
   // add funtionality to site-links
   return (
     <div className="bottom-banner">
-      <div className="bottom-banner-site-links-container">
-        <Link to="/about" className="bottom-banner-site-links link-font link">
-          ABOUT
-        </Link>
-        <Link to="/help" className="bottom-banner-site-links link-font link">
-          HELP & FAQ
-        </Link>
+      <div className="bottom-banner-socials">
         <Link
           to="https://www.grailed.com/JapaneseThreads/feedback"
           className="bottom-banner-site-links link-font link"
         >
           REVIEWS
         </Link>
-      </div>
-      <div className="bottom-banner-socials">
         <Link
           to="https://www.instagram.com/conwaysgoods/"
           className="link-font link"
