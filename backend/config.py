@@ -9,7 +9,7 @@ class DevelopmentConfig:
     SECRET_KEY = os.getenv('DEV_JWT_SECRET_KEY')
     
     # Database
-    SQLALCHEMY_DATABASE_URI = f"postgresql://{os.getenv('DEV_DB_USERNAME')}:{os.getenv('DEV_DB_PASSWORD')}@{os.getenv('DEV_DB_HOST')}:5433/{os.getenv('DEV_DB_NAME')}"
+    SQLALCHEMY_DATABASE_URI = f"postgresql://{os.getenv('DEV_DB_USERNAME')}:{os.getenv('DEV_DB_PASSWORD')}@{os.getenv('DEV_DB_HOST')}:{os.getenv('DEV_DB_PORT')}/{os.getenv('DEV_DB_NAME')}"
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     DB_USERNAME = os.getenv('DEV_DB_USERNAME')
     DB_PASSWORD = os.getenv('DEV_DB_PASSWORD')
@@ -36,7 +36,7 @@ class ProductionConfig:
     SECRET_KEY = os.getenv('JWT_SECRET_KEY')
     
     # Database
-    SQLALCHEMY_DATABASE_URI = f"postgresql://{os.getenv('PROD_DB_USERNAME')}:{os.getenv('PROD_DB_PASSWORD')}@{os.getenv('PROD_DB_HOST')}:5433/{os.getenv('PROD_DB_NAME')}"
+    SQLALCHEMY_DATABASE_URI = f"postgresql://{os.getenv('PROD_DB_USERNAME')}:{os.getenv('PROD_DB_PASSWORD')}@{os.getenv('PROD_DB_HOST')}:{os.getenv('PROD_DB_PORT')}/{os.getenv('PROD_DB_NAME')}"
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     DB_USERNAME = os.getenv('PROD_DB_USERNAME')
     DB_PASSWORD = os.getenv('PROD_DB_PASSWORD')
@@ -56,4 +56,4 @@ class ProductionConfig:
     # PayPal
     PAYPAL_CLIENT_ID = os.getenv('PAYPAL_CLIENT_ID')
     PAYPAL_SECRET = os.getenv('PAYPAL_SECRET')
-    PAYPAL_API = "https://api-m.sandbox.paypal.com"
+    PAYPAL_API = "https://api-m.paypal.com"
