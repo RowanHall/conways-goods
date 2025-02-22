@@ -69,42 +69,45 @@ const PostsWithImages: React.FC = () => {
   };
 
   return (
-    <div className="carousel-container" ref={carouselRef}>
+    <div className="carousel-container">
       <h2 className="carousel-title">Related Products</h2>
-      <div style={{ position: "relative" }}>
-        <ul
-          className="carousel-track"
-          style={{
-            transform: `translateX(-${currentIndex * (100 / visibleItems)}%)`,
-          }}
-        >
-          {posts.map((post, index) => (
-            <Link
-              to={`/post/${post.id}`}
-              key={index}
-              className="carousel-item"
-              style={{ width: `${100 / visibleItems}%` }}
-            >
-              <img
-                src={post.first_image_url}
-                alt={post.title}
-                className="carousel-image"
-              />
-              <h2 className="post-title">{post.title}</h2>
-              <h2 className="post-price">${post.price}</h2>
-            </Link>
-          ))}
-        </ul>
-        {currentIndex > 0 && (
-          <button className="carousel-nav-button prev" onClick={handlePrev}>
-            &lt;
-          </button>
-        )}
-        {currentIndex + visibleItems < posts.length && (
-          <button className="carousel-nav-button next" onClick={handleNext}>
-            &gt;
-          </button>
-        )}
+      <div className="carousel-container" ref={carouselRef}>
+        <div className="carousel-items-container">
+          {currentIndex > 0 && (
+            <button className="carousel-nav-button prev" onClick={handlePrev}>
+              &lt;
+            </button>
+          )}
+          <ul
+            className="carousel-track"
+            style={{
+              transform: `translateX(-${currentIndex * (100 / visibleItems)}%)`,
+            }}
+          >
+            {posts.map((post, index) => (
+              <Link
+                to={`/post/${post.id}`}
+                key={index}
+                className="carousel-item"
+                style={{ width: `${100 / visibleItems}%` }}
+              >
+                <img
+                  src={post.first_image_url}
+                  alt={post.title}
+                  className="carousel-image"
+                />
+                <h2 className="post-title">{post.title}</h2>
+                <h2 className="post-price">${post.price}</h2>
+              </Link>
+            ))}
+          </ul>
+
+          {currentIndex + visibleItems < posts.length && (
+            <button className="carousel-nav-button next" onClick={handleNext}>
+              &gt;
+            </button>
+          )}
+        </div>
       </div>
     </div>
   );

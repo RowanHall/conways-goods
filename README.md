@@ -1,50 +1,160 @@
-# React + TypeScript + Vite
+# CONWAY'S GOODS
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+An e-commerce platform for selling designer fashion items, integrating authentication, payment processing, and AWS S3 storage.
 
-Currently, two official plugins are available:
+## Tech Stack
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- **Backend**: Flask (Python), PostgreSQL
+- **Frontend**: React (TypeScript), Vite
+- **Styling**: CSS Modules
+- **Storage**: AWS S3
+- **Authentication**: Custom authentication system with JWT
+- **Payments**: PayPal integration
 
-## Expanding the ESLint configuration
+## Installation
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+### Prerequisites
 
-- Configure the top-level `parserOptions` property like this:
+- Python 3
+- npm
+- PostgreSQL
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+### Setup Instructions
+
+#### Backend Setup
+
+1. **Clone the repository**:
+   ```bash
+   git clone https://github.com/RowanHall/conways-goods
+   cd conways-goods
+   ```
+2. **Set up a virtual environment**:
+   ```bash
+   python3 -m venv venv
+   source venv/bin/activate  # On Windows, use `venv\Scripts\activate`
+   ```
+3. **Install dependencies**:
+   ```bash
+   pip install -r requirements.txt
+   ```
+4. **Set up environment variables**:
+   - Create a `.env` file in the root directory.
+   - Add the necessary database and AWS credentials (refer to `config.py`).
+5. **Initialize the database**:
+   ```bash
+   python db.py
+   ```
+6. **Run the backend server**:
+   ```bash
+   python run.py
+   ```
+
+#### Frontend Setup
+
+1. **Navigate to the frontend directory**:
+   ```bash
+   cd frontend
+   ```
+2. **Install dependencies**:
+   ```bash
+   npm install
+   ```
+3. **Run the development server**:
+   ```bash
+   npm run dev
+   ```
+
+## Project Structure
+
+```
+project_root/
+│── backend/
+│   ├── app/
+│   │   ├── api/
+│   │   │   ├── auth.py
+│   │   │   ├── payments.py
+│   │   │   ├── posts.py
+│   │   │   ├── s3.py
+│   │   ├── services/
+│   │   │   ├── auth_service.py
+│   │   │   ├── payments_service.py
+│   │   │   ├── post_service.py
+│   │   │   ├── s3_service.py
+│   │   │   ├── utils/
+│   │   │   │   ├── db.py
+│   │   │   ├── __init__.py
+│   │   ├── extensions.py
+│   │   ├── __init__.py
+│   ├── config.py
+│   ├── run.py
+│   ├── requirements.txt
+│── frontend/
+│   ├── src/
+│   │   ├── components/
+│   │   │   ├── AdminPanel/
+│   │   │   ├── Bottom/
+│   │   │   ├── Carousel/
+│   │   │   ├── CreatePostForm/
+│   │   │   ├── DeletePost/
+│   │   │   ├── Login/
+│   │   │   ├── Navbar/
+│   │   │   ├── PayPalCheckout/
+│   │   │   ├── PostDisplayWrap/
+│   │   │   ├── ProtectedRoute/
+│   │   │   ├── Video/
+│   │   ├── context/
+│   │   │   ├── AuthContext.tsx
+│   │   │   ├── CartContext.tsx
+│   │   ├── pages/
+│   │   │   ├── Cart/
+│   │   │   ├── Home/
+│   │   │   ├── Post/
+│   │   │   ├── Shop/
+│   │   ├── styles/
+│   │   ├── App.tsx
+│   │   ├── index.css
+│   │   ├── main.tsx
+│   │   ├── Navbar.tsx
+│   │   ├── Cart.tsx
+│   │   ├── Shop.tsx
+│   │   ├── Post.tsx
+│   │   ├── AdminPanel.tsx
+│   ├── public/
 ```
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+## API Endpoints
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
+### Authentication
 
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
-```
+- `POST /auth/login` - Login a user
+- `POST /auth/register` - Register a new user
+- `GET /auth/me` - Get current user
+
+### Posts
+
+- `GET /posts/first-image` - Fetch all post previews
+- `GET /posts/:id` - Fetch a post by ID
+- `POST /posts/create` - Create a new post (Admin only)
+- `DELETE /posts/delete/:id` - Delete a post (Admin only)
+
+### Payments
+
+- `POST /payments/capture` - Process a payment
+
+### AWS S3 Storage
+
+- `GET /s3/presigned-url` - Get a presigned URL for uploading a file to S3
+
+## Frontend Features
+
+- **React Router** for navigation
+- **Protected Routes** for admin panel
+- **Context API** for state management (Authentication & Cart)
+- **Axios** for API requests
+- **PayPal Integration** for payments
+- **Carousel Component** for displaying products
+- **Responsive UI** with CSS modules
+
+## Contributors
+
+- Rowan Hall

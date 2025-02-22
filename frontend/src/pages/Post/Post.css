@@ -16,13 +16,11 @@
     flex-wrap: wrap;
     justify-content: center;
     align-items: center;
-    margin-top: 10rem;
+    margin-top: 11rem;
+    margin-bottom: 4rem;
     max-width: 1000px;
     margin-left: auto;
     margin-right: auto;
-
-    
-    
 }
 .post-info-container {
     display: flex;
@@ -32,9 +30,16 @@
     padding: 0;
     margin: 50px 0 0 0;
     width: 100%;
-    min-width: 350px;
-    max-width: 500px;
+    min-width: 250px;
+    max-width: 450px;
     flex: 1;
+}
+.post-info-container-inner {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    width: 100%;
 }
 
 
@@ -79,6 +84,10 @@
     font-weight: 750;
     color: #333;  
 }
+
+.title, .price {
+    margin-left: 10px;
+}
 .click {
     padding: 8px 12px;
     font-size: 16px;
@@ -89,9 +98,13 @@
     border-radius: 5px;
 }
 .prev-button, .next-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     font-size: 22px;
     font-weight: 300;
     background-color: rgba(209, 209, 209, 0);
+    color: #000000;
     border: none;
     padding: 8px 16px;
     cursor: pointer;
@@ -103,7 +116,7 @@
 }
 
 .prev-button:hover, .next-button:hover {
-    background-color: rgba(198, 198, 198, 0.7); 
+    background-color: rgba(198, 198, 198, 0.7);
 }
 .add-to-cart-button, .message-seller-button {
     display: flex;
@@ -119,7 +132,7 @@
     margin-top: 16px;
     transition: background-color 0.2s ease;
     width: 100%;
-    transform: scale(1);
+
     transition: all 0.2s ease;
     flex: 1;
 }

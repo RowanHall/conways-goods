@@ -1,6 +1,6 @@
 from flask import request, jsonify, current_app
 from app.extensions import s3
-from config import DevelopmentConfig
+from config import DevelopmentConfig as Config
 import uuid
 from app.api.auth import get_current_user_service
 
@@ -40,15 +40,15 @@ def get_presigned_url_service():
 
         # Generate presigned URL with minimal conditions
         presigned_post = s3.generate_presigned_post(
-            Bucket=DevelopmentConfig.BUCKET_NAME,
+            Bucket=Config.BUCKET_NAME,
             Key=unique_filename,
             Fields={
                 'Content-Type': content_type,
                 'key': unique_filename,
-                'bucket': DevelopmentConfig.BUCKET_NAME
+                'bucket': Config.BUCKET_NAME
             },
             Conditions=[
-                {'bucket': DevelopmentConfig.BUCKET_NAME},
+                {'bucket': Config.BUCKET_NAME},
                 {'key': unique_filename},
                 ['content-length-range', 0, 10485760],  # 10MB max
                 ['eq', '$Content-Type', content_type]
@@ -61,8 +61,3 @@ def get_presigned_url_service():
     except Exception as e:
         current_app.logger.error(f"Error generating presigned URL: {str(e)}")
         return jsonify({'error': str(e)}), 500
-    # finally:
-    #     if 'cur' in locals():
-    #         cur.close()
-    #     if 'conn' in locals():
-    #         conn.close()

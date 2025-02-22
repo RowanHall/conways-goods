@@ -1,5 +1,5 @@
 from flask import request, jsonify
-from config import DevelopmentConfig
+from config import DevelopmentConfig as Config
 import requests
 def capture_payment_service():
     """ Capture PayPal payment """
@@ -15,7 +15,7 @@ def capture_payment_service():
             "Authorization": f"Bearer {get_paypal_access_token()}"
         }
         response = requests.post(
-            f"{DevelopmentConfig.PAYPAL_API}/v2/checkout/orders/{order_id}/capture",
+            f"{Config.PAYPAL_API}/v2/checkout/orders/{order_id}/capture",
             headers=headers
         )
         
@@ -25,9 +25,9 @@ def capture_payment_service():
     
 def get_paypal_access_token():
     """ Get an access token from PayPal """
-    auth = (DevelopmentConfig.PAYPAL_CLIENT_ID, DevelopmentConfig.PAYPAL_SECRET)
+    auth = (Config.PAYPAL_CLIENT_ID, Config.PAYPAL_SECRET)
     response = requests.post(
-        f"{DevelopmentConfig.PAYPAL_API}/v1/oauth2/token",
+        f"{Config.PAYPAL_API}/v1/oauth2/token",
         auth=auth,
         data={"grant_type": "client_credentials"}
     )
