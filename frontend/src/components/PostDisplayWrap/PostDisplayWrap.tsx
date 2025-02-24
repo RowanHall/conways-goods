@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+const API_BASE_URL = import.meta.env.VITE_BACKEND_URL;
 import "./PostDisplayWrap.css";
 import { Link } from "react-router-dom";
 
@@ -37,7 +38,7 @@ const PostDisplayWrap: React.FC<PostDisplayWrapProps> = ({ filters }) => {
     }
 
     axios
-      .get(`http://127.0.0.1:5005/posts/first-image?${params.toString()}`)
+      .get(`${API_BASE_URL}/posts/first-image?${params.toString()}`)
       .then((response) => {
         if (response.data.error) {
           setError(response.data.error);
