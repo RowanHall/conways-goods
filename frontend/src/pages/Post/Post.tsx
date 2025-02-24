@@ -7,6 +7,7 @@ import { useCart } from "../../context/CartContext";
 import DeletePost from "../../components/DeletePost/DeletePost";
 import { useAuth } from "../../context/AuthContext";
 
+const API_BASE_URL = import.meta.env.VITE_BACKEND_URL;
 // Define the type for the post data
 interface PostData {
   id: number;
@@ -31,9 +32,7 @@ function Post() {
   useEffect(() => {
     const fetchPost = async () => {
       try {
-        const response = await axios.get(
-          `http://localhost:5005/api/posts/${postId}`
-        );
+        const response = await axios.get(`${API_BASE_URL}/api/posts/${postId}`);
         setPost(response.data);
       } catch (error) {
         if (error instanceof Error) {
@@ -53,7 +52,7 @@ function Post() {
     // Fetch current user ID if authenticated
     if (isAuthenticated) {
       axios
-        .get("http://localhost:5005/api/me", {
+        .get(`${API_BASE_URL}/api/me`, {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("token")}`,
           },

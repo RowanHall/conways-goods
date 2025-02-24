@@ -1,5 +1,6 @@
 import React, { useEffect, useState, useRef } from "react";
 import axios from "axios";
+const API_BASE_URL = import.meta.env.VITE_BACKEND_URL;
 import "./Carousel.css";
 import { Link } from "react-router-dom";
 
@@ -43,7 +44,7 @@ const PostsWithImages: React.FC = () => {
 
   useEffect(() => {
     axios
-      .get("http://127.0.0.1:5005/posts/first-image")
+      .get(`${API_BASE_URL}/posts/first-image`)
       .then((response) => {
         console.log("Fetched posts:", response.data);
         setPosts(response.data);

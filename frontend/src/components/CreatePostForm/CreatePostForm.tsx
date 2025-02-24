@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
+const API_BASE_URL = import.meta.env.VITE_BACKEND_URL;
 import "./CreatePostForm.css";
 
 // Define category and designer options
@@ -58,18 +59,15 @@ const CreatePostForm = () => {
         size: file.size,
       });
 
-      const response = await axios.get(
-        `http://localhost:5005/api/s3/presigned-url`,
-        {
-          params: {
-            filename: file.name,
-            contentType: file.type,
-          },
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem("token")}`,
-          },
-        }
-      );
+      const response = await axios.get(`${API_BASE_URL}/api/s3/presigned-url`, {
+        params: {
+          filename: file.name,
+          contentType: file.type,
+        },
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      });
 
       const { url, fields } = response.data;
       console.log("Received presigned URL data:", { url, fields });
@@ -127,7 +125,7 @@ const CreatePostForm = () => {
       );
 
       // Create post with image URLs
-      await axios.post("http://localhost:5005/api/posts/create", {
+      await axios.post(`${API_BASE_URL}/api/posts/create`, {
         ...formData,
         price: parseFloat(formData.price),
         images: imageUrls,

@@ -1,5 +1,5 @@
 import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js";
-
+const API_BASE_URL = import.meta.env.VITE_BACKEND_URL;
 interface PayPalCheckoutProps {
   amount: number;
 }
@@ -38,7 +38,7 @@ const PayPalCheckout = ({ amount }: PayPalCheckoutProps) => {
             );
 
             // Send transaction details to Flask backend
-            fetch("http://localhost:5005/paypal/capture", {
+            fetch(`${API_BASE_URL}/paypal/capture`, {
               method: "POST",
               headers: { "Content-Type": "application/json" },
               body: JSON.stringify({ orderID: details.id }),
