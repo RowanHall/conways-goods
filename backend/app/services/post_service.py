@@ -2,7 +2,7 @@ from flask import request, jsonify, make_response
 from app.utils.db import get_db_connection
 from flask_jwt_extended import get_jwt_identity
 from app.extensions import s3
-from config import DevelopmentConfig
+from config import ProductionConfig as Config
 from flask import current_app
 from app.services.auth_service import get_current_user_service
 def post_previewer_service():
@@ -222,7 +222,7 @@ def delete_post_service(post_id):
                 # Parse out the S3 key from the image URL (assuming .amazonaws.com/ is in the URL)
                 key = image_url.split('.amazonaws.com/')[1]
                 s3.delete_object(
-                    Bucket=DevelopmentConfig.BUCKET_NAME,
+                    Bucket=Config.BUCKET_NAME,
                     Key=key
                 )
             except Exception as e:

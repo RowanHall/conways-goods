@@ -1,5 +1,5 @@
 from flask import request, jsonify
-from config import DevelopmentConfig as Config
+from config import ProductionConfig as Config
 import requests
 def capture_payment_service():
     """ Capture PayPal payment """

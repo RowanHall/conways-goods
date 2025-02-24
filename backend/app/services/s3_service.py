@@ -1,6 +1,6 @@
 from flask import request, jsonify, current_app
 from app.extensions import s3
-from config import DevelopmentConfig as Config
+from config import ProductionConfig as Config
 import uuid
 from app.api.auth import get_current_user_service
 

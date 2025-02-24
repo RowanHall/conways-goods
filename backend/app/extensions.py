@@ -4,7 +4,7 @@ from flask_jwt_extended import JWTManager
 from flask_cors import CORS
 import boto3
 from botocore.config import Config as BotoCoreConfig
-from config import DevelopmentConfig as Config
+from config import ProductionConfig as Config
 
 db = SQLAlchemy()
 jwt = JWTManager()
