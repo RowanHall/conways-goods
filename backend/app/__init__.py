@@ -19,7 +19,7 @@ def create_app(config_object=None):
     jwt.init_app(app)
     cors.init_app(app, resources={
         r"/*": {
-            "origins": [Config.FRONTEND_URL],
+            "origins": [Config.FRONTEND_URL,Config.FRONTEND_URL_2],
             "methods": ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
             "allow_headers": ["Content-Type", "Authorization"],
             "expose_headers": ["Content-Type", "Authorization"],

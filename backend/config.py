@@ -64,4 +64,5 @@ class ProductionConfig:
 
     # URL
     FRONTEND_URL = os.getenv('PROD_URL')
+    FRONTEND_URL_2 = os.getenv('PROD_URL_2')
     PORT = os.getenv('PROD_PORT')
