@@ -114,11 +114,6 @@ project_root/
 │   │   ├── App.tsx
 │   │   ├── index.css
 │   │   ├── main.tsx
-│   │   ├── Navbar.tsx
-│   │   ├── Cart.tsx
-│   │   ├── Shop.tsx
-│   │   ├── Post.tsx
-│   │   ├── AdminPanel.tsx
 │   ├── public/
 ```
 
